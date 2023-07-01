@@ -26,8 +26,8 @@ st.radio("Select one the options below:", options=["Positive", "Negative", "No c
 
 st.write("""Express your beliefs for the likely impact of the program for the firms that are
 offered the full intervention, compared to firms offered just the diagnostic phase and trade:""")
-survey.select_slider("Select one of the following options:"
-    , options= array )
+survey.select_slider("Select one of the following options:", options= array )
 
-st.radio("Select one or more of the following options", options = ["Diversify the range of products exported", "Diversify the destinations towards the products are exported", "All of the above"])
+st.radio("Select one of the following options", options = ["Diversify the range of products exported", "Diversify the destinations towards the products are exported", "All of the above"])
 
+st.title("Survey for Informative Priors")
