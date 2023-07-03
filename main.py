@@ -27,7 +27,7 @@ if export_impact == "Positive":
     positive_text = st.text_input("Write your answer below:", key = 'positive_text' )
 if export_impact == "Negative":
     st.write("""Choose what percentage on average do you think the export is going to decrease in the treated firms:""")
-    negative_slider = st.slider("Select the percentage sliding on the bar below:", -100, 0, format = '%d')
+    negative_slider = st.slider("Select the percentage sliding on the bar below:", 0, -100, format = '%d')
     st.write("Please shortly summarize the reasons for your previous answer:")
     negative_text = st.text_input("Write your answer below:", key = 'negative_text')
 else: 
