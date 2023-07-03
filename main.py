@@ -25,7 +25,7 @@ if export_impact == "Positive":
     positive_slider = st.slider("Select the percentage sliding on the bar below:", 0, 100, format = '%d')
     st.write("Please shortly summarize the reasons for your previous answer:")
     positive_text = st.text_input("Write your answer below:", key = 'positive_text' )
-if export_impact == "Negative":
+elif export_impact == "Negative":
     st.write("""Choose what percentage on average do you think the export is going to decrease in the treated firms:""")
     negative_slider = st.slider("Select the percentage sliding on the bar below:", 0, -100, format = '%d')
     st.write("Please shortly summarize the reasons for your previous answer:")
@@ -34,6 +34,6 @@ else:
     st.write("Please shortly summarize the reasons for your previous answer:")
     text = st.text_input("Write your answer below:", key = 'text')
 
-st.radio("Select one of the following options", options = ["Diversify the range of products exported", "Diversify the destinations towards the products are exported", "All of the above"])
+st.radio("Select one of the following options", options = ["Diversify the range of products exported", "Diversify the destinations of exportation", "All of the above"])
 
 st.success("You completed the form successfully!")
