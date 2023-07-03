@@ -30,4 +30,4 @@ survey.select_slider("Select one of the following options:", options= array )
 
 st.radio("Select one of the following options", options = ["Diversify the range of products exported", "Diversify the destinations towards the products are exported", "All of the above"])
 
-st.title("Survey for Informative Priors")
+st.success("You completed the form successfully!")
