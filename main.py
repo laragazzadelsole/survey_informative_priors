@@ -21,12 +21,22 @@ option = st.selectbox(
 st.write('You selected:', option)
 array = np.arange(0, 101)
 
-st.write("Express your beliefs regarding the impact of the consulting programm on export for the firms offered the treatment:")
-st.radio("Select one the options below:", options=["Positive", "Negative", "No changes"], horizontal=False)
+st.write("Express your beliefs regarding the impact of the consulting programm on export for the firms offered the treatment compared to firms offered just the diagnostic phase and trade:")
+export_impact = st.radio("Select one the options below:", options=["Positive", "Negative", "No changes"], horizontal=False)
 
-st.write("""Express your beliefs for the likely impact of the program for the firms that are
-offered the full intervention, compared to firms offered just the diagnostic phase and trade:""")
-survey.select_slider("Select one of the following options:", options= array )
+if export_impact == 0:
+    st.write("""Choose what percentage on average do you think the export is going to increase in the treated firms:""")
+    st.slider("Select the percentage sliding on the bar below:", 0, 100, format = '%d')
+    st.write("Please shortly summarize the reasons for your previous answer:")
+    st.text_input("Write your answer below:", )
+if export_impact == 1:
+    st.write("""Choose what percentage on average do you think the export is going to decrease in the treated firms:""")
+    st.slider("Select the percentage sliding on the bar below:", -100, 0, format = '%d')
+    st.write("Please shortly summarize the reasons for your previous answer:")
+    st.text_input("Write your answer below:", )
+else: 
+    st.write("Please shortly summarize the reasons for your previous answer:")
+    st.text_input("Write your answer below:", )
 
 st.radio("Select one of the following options", options = ["Diversify the range of products exported", "Diversify the destinations towards the products are exported", "All of the above"])
 
