@@ -22,14 +22,14 @@ export_impact = st.radio("Select one the options below:", options=["Positive", "
 
 if export_impact == "Positive":
     st.write("""Choose what percentage on average do you think the export is going to increase in the treated firms:""")
-    positive_slider = st.slider("Select the percentage sliding on the bar below:", 0, 100, format = '%d', id = 'positive_slider')
+    positive_slider = st.slider("Select the percentage sliding on the bar below:", 0, 100, format = '%d')
     st.write("Please shortly summarize the reasons for your previous answer:")
     positive_text = st.text_input("Write your answer below:", id= 'positive_text' )
 if export_impact == "Negative":
     st.write("""Choose what percentage on average do you think the export is going to decrease in the treated firms:""")
-    negative_slider = st.slider("Select the percentage sliding on the bar below:", -100, 0, format = '%d', id = 'negative_slider')
-    negative_text = st.write("Please shortly summarize the reasons for your previous answer:", id = 'negative_text')
-    st.text_input("Write your answer below:", )
+    negative_slider = st.slider("Select the percentage sliding on the bar below:", -100, 0, format = '%d')
+    st.write("Please shortly summarize the reasons for your previous answer:")
+    negative_text = st.text_input("Write your answer below:", id = 'negative_text')
 else: 
     st.write("Please shortly summarize the reasons for your previous answer:")
     text = st.text_input("Write your answer below:", id = 'text')
