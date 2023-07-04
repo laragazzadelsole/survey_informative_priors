@@ -4,18 +4,35 @@ import numpy as np
 
 survey = ss.StreamlitSurvey()
 
+
+
+#[theme]
+#primaryColor="#F63366"
+#backgroundColor="#FFFFFF"
+#secondaryBackgroundColor="#F0F2F6"
+#textColor="#262730"
+#font="sans serif"
+
 st.title("Survey for Informative Priors")
 st.write("Survey draft realized with Streamlit based on the paper \"Bayesian Impact Evaluation with Informative Priors\" by Leonardo Iacovone, David McKenzie and Rachael Meager.")
 st.write("""The scope of this survey is to record informative priors of different categories of actors: policymakers, experts and firms, in order to incorporate
 them in Bayesian impact evaluation to learn more from expensive new programs tested on relatively small samples.""")
 st.write("The research is held on a Colombian Government Program which aimed to increase export in small, medium firms.")
 
+#insert consent
+placeholder = st.empty()
+with placeholder.container():
+    with st.expander("Consent", expanded=True):
+        st.markdown("""
+        By submitting the form below you agree to your data being used for research. 
+        """)
+        agree = st.checkbox("I understand and consent.")
 
 st.write("Specify your professional category:")
 option = st.selectbox(
     'Select one of the options below:',
     ('Policymaker', 'Expert', 'Firm'))
-st.write('You selected:', option)
+st.write('The survey for the', option, 'will be displayed.' )
 
 st.write("Express your beliefs regarding the impact of the consulting programm on export for the firms offered the treatment compared to firms offered just the diagnostic phase and trade:")
 export_impact = st.radio("Select one the options below:", options=["Positive", "Negative", "No changes"], horizontal=False)
