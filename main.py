@@ -28,6 +28,16 @@ with placeholder.container():
         """)
         agree = st.checkbox("I understand and consent.")
 
+if agree:
+    placeholder.empty()
+    with st.expander("Consent", expanded=False):
+        st.markdown("""
+        By submitting the form below you agree to your data being used for research. 
+        Your twitter handle will be stored in a private google sheet and will not be shared with anyone (unless extraordinary circumstances force us to share it). 
+        You can ask for your data to be deleted by emailing us with an app ID number you'll be issued after submitting the form. 
+        """)
+        st.markdown("You have consented.")
+
 st.write("Specify your professional category:")
 option = st.selectbox(
     'Select one of the options below:',
