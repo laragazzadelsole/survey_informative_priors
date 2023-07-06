@@ -17,11 +17,15 @@ st.write("""The scope of this survey is to record informative priors of differen
 them in Bayesian impact evaluation to learn more from expensive new programs tested on relatively small samples.""")
 st.write("The research is held on a Colombian Government Program which aimed to increase export in small, medium and large firms.")
 
-#fix the session state
+# Initialize session state
 if 'key' not in st.session_state:
     st.session_state['key'] = 'value'
+    st.session_state['consent'] = False
 
-#insert consent
+# Insert consent
+def add_consent():
+    st.session_state['consent'] = True
+
 placeholder = st.empty()
 with placeholder.container():
     with st.expander("Consent", expanded=True):
@@ -31,7 +35,9 @@ with placeholder.container():
         agree = st.checkbox("I understand and consent.")
         if agree:
             st.markdown("You have consented. Select \"Next\" to start the survey.")
-if st.button('Next'):
+            st.button('Next', on_click=add_consent)
+
+if st.session_state['consent']:
     st.write("Specify your professional category:")
     option = st.selectbox(
         'Select one of the options below:',
