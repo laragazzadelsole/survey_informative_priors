@@ -23,7 +23,13 @@ if 'key' not in st.session_state:
     st.session_state['key'] = 'value'
     st.session_state['consent'] = False
     st.session_state['submit'] = False
-    
+
+def safe_var(variable):
+    try:
+        return variable
+    except:
+        return ""
+        
 # Insert consent
 def add_consent():
     st.session_state['consent'] = True
@@ -165,7 +171,7 @@ if st.session_state['consent']:
         data = {
             'Professional Category': [st.session_state.option],
             'Prior on the program\'s impact': [st.session_state.export_impact],
-            'Percentage of expected impact': [st.session_state.positive_slider, st.session_state.negative_slider],
+            'Percentage of expected impact': [safe_var(st.session_state.positive_slider), st.session_state.negative_slider],
             'Probability of expected impact': [st.session_state.prob_slider, st.session_state.prob_slider_neg, st.session_state.prob_slider_neutral],
             'Effects of the impact': [st.session_state.export_outcome],
             'Motivation' : [st.session_state.positive_text, st.session_state.negative_text, st.session_state.text]
