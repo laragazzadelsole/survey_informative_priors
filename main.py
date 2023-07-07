@@ -27,8 +27,7 @@ if 'key' not in st.session_state:
 def safe_var(key):
     if key in st.session_state:
         return st.session_state[key]
-    except:
-        return ""
+    return ""
         
 # Insert consent
 def add_consent():
