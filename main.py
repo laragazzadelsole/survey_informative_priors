@@ -73,10 +73,18 @@ if st.session_state['consent']:
         if 'positive_slider' not in st.session_state:
             st.session_state.positive_slider = positive_slider
 
+        # Update the selected choice if a new option is selected
+        if positive_slider != st.session_state.positive_slider:
+            st.session_state.positive_slider = positive_slider
+
         st.write("""Choose with what probability on average do you think the export is going to increase in the treated firms:""")
         prob_slider = st.slider("Select the probability sliding on the bar below:", 0, 100, key = 'prob_slider')
 
         if 'prob_slider' not in st.session_state:
+            st.session_state.prob_slider = prob_slider
+
+        # Update the selected choice if a new option is selected
+        if prob_slider != st.session_state.prob_slider:
             st.session_state.prob_slider = prob_slider
 
         st.write("Please shortly summarize the reasons for your previous answer:")
@@ -85,13 +93,28 @@ if st.session_state['consent']:
         if 'positive_text' not in st.session_state:
             st.session_state.positive_text = positive_text
 
+        # Update the selected choice if a new option is selected
+        if positive_text != st.session_state.positive_text:
+            st.session_state.positive_text = positive_text
+
         export_outcome = st.radio("Select one of the following options", options = ["Diversify the range of products exported", "Diversify the destinations of exportation", "All of the above"], key = 'export_outcome')
     
+        if 'export_outcome' not in st.session_state:
+            st.session_state.export_outcome = export_impact
+
+        # Update the selected choice if a new option is selected
+        if export_outcome != st.session_state.export_outcome:
+            st.session_state.export_outcome = export_outcome
+
     elif export_impact == "Negative":
         st.write("""Choose what percentage on average do you think the export is going to decrease in the treated firms:""")
         negative_slider = st.slider("Select the percentage sliding on the bar below:", -100, 0, format = '%f', key = 'negative_slider')
 
         if 'negative_slider' not in st.session_state:
+            st.session_state.negative_slider = negative_slider
+
+        # Update the selected choice if a new option is selected
+        if negative_slider != st.session_state.negative_slider:
             st.session_state.negative_slider = negative_slider
 
         st.write("""Choose with what probability on average do you think the export is going to decrease in the treated firms:""")
@@ -100,10 +123,18 @@ if st.session_state['consent']:
         if 'prob_slider_neg' not in st.session_state:
             st.session_state.prob_slider_neg = prob_slider_neg
 
+                # Update the selected choice if a new option is selected
+        if prob_slider_neg != st.session_state.prob_slider_neg:
+            st.session_state.prob_slider_neg = prob_slider_neg
+
         st.write("Please shortly summarize the reasons for your previous answer:")
         negative_text = st.text_input("Write your answer below:", key = 'negative_text')
 
         if 'negative_text' not in st.session_state:
+            st.session_state.negative_text = negative_text
+
+                    # Update the selected choice if a new option is selected
+        if negative_text != st.session_state.negative_text:
             st.session_state.negative_text = negative_text
     else: 
         st.write("""Choose with what probability on average do you think the export is not going to change in the treated firms:""")
@@ -111,31 +142,39 @@ if st.session_state['consent']:
         
         if 'prob_slider_neutral' not in st.session_state:
             st.session_state.prob_slider_neutral = prob_slider_neutral
+        # Update the selected choice if a new option is selected
+        if prob_slider_neutral != st.session_state.prob_slider_neutral:
+            st.session_state.prob_slider_neutral = prob_slider_neutral
 
         st.write("Please shortly summarize the reasons for your previous answer:")
         text = st.text_input("Write your answer below:", key = 'text')
 
         if 'text' not in st.session_state:
             st.session_state.text = text
-    
+
+            # Update the selected choice if a new option is selected
+        if text != st.session_state.text:
+            st.session_state.text = text
+
     submit = st.button("Submit", on_click = add_submission)
 
     if st.session_state['submit']:
         st.success("You completed the form successfully!")
     
     # Save session state in a CSV file
-    data = {
-        'Professional Category:': [st.session_state.option],
-        'Prior on the program\'s impact:': [st.session_state.export_impact],
-        'Percentage of expected impact:': [st.session_state.positive_slider, st.session_state.negative_slider],
-        'Probability of expected impact:': [st.session_state.prob_slider, st.session_state.prob_slider_neg, st.session_state.prob_slider_neutral],
-        'Motivation:' : [st.session_state.positive_text, st.session_state.negative_text, st.session_state.text]
-        
-    }
+        data = {
+            'Professional Category': [st.session_state.option],
+            'Prior on the program\'s impact': [st.session_state.export_impact],
+            'Percentage of expected impact': [st.session_state.positive_slider, st.session_state.negative_slider],
+            'Probability of expected impact': [st.session_state.prob_slider, st.session_state.prob_slider_neg, st.session_state.prob_slider_neutral],
+            'Effects of the impact': [st.session_state.export_outcome],
+            'Motivation' : [st.session_state.positive_text, st.session_state.negative_text, st.session_state.text]
 
-    df = pd.DataFrame(data)
-    df.to_csv('session_state.csv', index=False)
-        #st.write(st.session_state)
+        }
+
+        df = pd.DataFrame(data)
+        df.to_csv('Results.csv', index=False)
+            #st.write(st.session_state)
 
 
 
