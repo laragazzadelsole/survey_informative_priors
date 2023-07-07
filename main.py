@@ -13,21 +13,24 @@ survey = ss.StreamlitSurvey()
 
 
 st.title("Survey for Informative Priors")
-st.write("Survey draft realized with Python's Streamlit package based on the paper \"Bayesian Impact Evaluation with Informative Priors\" by Leonardo Iacovone, David McKenzie and Rachael Meager.")
+st.write("This survey draft is realized with Python's Streamlit package by Sara Gironi. It is based on the paper ***Bayesian Impact Evaluation with Informative Priors*** by Leonardo Iacovone, David McKenzie and Rachael Meager.")
 st.write("""The scope of this survey is to record informative priors of different categories of actors: policymakers, experts and firms, in order to incorporate
-them in Bayesian impact evaluation to learn more from expensive new programs tested on relatively small samples.""")
-st.write("The research is held on a Colombian Government Program which aimed to increase export in small, medium and large firms.")
+them in Bayesian impact evaluation, which is particularly helpful to learn more from expensive new programs tested on relatively small samples.""")
+st.write("The following questions regard the priors on a Colombian Government Program which aimed to increase export tested on a group of 200 firms.")
 
 # Initialize session state
 if 'key' not in st.session_state:
     st.session_state['key'] = 'value'
     st.session_state['consent'] = False
     st.session_state['submit'] = False
+    st.session_state['No answer'] = ''
+
+df = pd.DataFrame()
 
 def safe_var(key):
     if key in st.session_state:
         return st.session_state[key]
-    return ""
+    #return st.session_state['No answer']
         
 # Insert consent
 def add_consent():
@@ -35,6 +38,17 @@ def add_consent():
 
 def add_submission():
     st.session_state['submit'] = True 
+
+
+if 'data' not in st.session_state:
+    st.session_state['data'] = {
+    'Professional Category': [],
+    'Prior on the program\'s impact': [],
+    'Percentage of expected impact': [],
+    'Probability of expected impact': [],
+    'Effects of the impact': [],
+    'Motivation': []
+}
 
 placeholder = st.empty()
 with placeholder.container():
@@ -166,21 +180,52 @@ if st.session_state['consent']:
     if st.session_state['submit']:
         st.success("You completed the form successfully!")
     
-    # Save session state in a CSV file
+        # Save session state in a CSV file
         data = {
-            'Professional Category': [st.session_state.option],
-            'Prior on the program\'s impact': [st.session_state.export_impact],
-            'Percentage of expected impact': [safe_var("positive_slider"), st.session_state.negative_slider],
-            'Probability of expected impact': [st.session_state.prob_slider, st.session_state.prob_slider_neg, st.session_state.prob_slider_neutral],
-            'Effects of the impact': [st.session_state.export_outcome],
-            'Motivation' : [st.session_state.positive_text, st.session_state.negative_text, st.session_state.text]
+            'Professional Category': [safe_var("option")],
+            'Prior on the program\'s impact': [safe_var("export_impact")],
+            'Percentage of expected impact': [safe_var("positive_slider"), safe_var("negative_slider")],
+            'Probability of expected impact': [safe_var("prob_slider"), safe_var("prob_slider_neg"), safe_var("prob_slider_neutral")],
+            'Effects of the impact': [safe_var("export_outcome")],
+            'Motivation' : [safe_var("positive_text"), safe_var("negative_text"), safe_var("text")]
 
         }
 
-        df = pd.DataFrame(data)
-        df.to_csv('Results.csv', index=False)
+        #st.write(data)
+
             #st.write(st.session_state)
 
+        # Append session state data to the CSV file
+        data = st.session_state['data']
+        max_length = max(len(data[key]) for key in data)
+        data_filled = {key: data[key] + [''] * (max_length - len(data[key])) for key in data}
+        df = pd.DataFrame(data_filled)
+        df.to_csv('Results.csv', index=False)
 
+    # ...
 
+    def add_submission():
+        data = st.session_state['data']
+        data['Professional Category'].append(safe_var('option'))
+        data['Prior on the program\'s impact'].append(safe_var('export_impact'))
 
+        if safe_var('export_impact') == 'Positive':
+            data['Percentage of expected impact'].append(safe_var('positive_slider'))
+            data['Probability of expected impact'].append(safe_var('prob_slider'))
+            data['Effects of the impact'].append(safe_var('export_outcome'))
+            data['Motivation'].append(safe_var('positive_text'))
+        elif safe_var('export_impact') == 'Negative':
+            data['Percentage of expected impact'].append(safe_var('negative_slider'))
+            data['Probability of expected impact'].append(safe_var('prob_slider_neg'))
+            data['Effects of the impact'].append(safe_var('export_outcome'))
+            data['Motivation'].append(safe_var('negative_text'))
+        else:
+            data['Percentage of expected impact'].append(None)
+            data['Probability of expected impact'].append(safe_var('prob_slider_neutral'))
+            data['Effects of the impact'].append(None)
+            data['Motivation'].append(safe_var('text'))
+
+        st.session_state['data'] = data
+
+        df = pd.DataFrame(data)
+        df.to_csv('Results.csv', index=False)
