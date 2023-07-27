@@ -47,5 +47,4 @@ validators==0.20.0
 watchdog==3.0.0
 zipp==3.15.0
 shillelagh==1.2.6
-google.oauth2==1.23.0
 gsheetsdb==0.1.13.1
