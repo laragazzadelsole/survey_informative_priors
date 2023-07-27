@@ -3,20 +3,41 @@ import streamlit as st
 import pandas as pd
 from utils import *
 from components import *
-from shillelagh.backends.apsw.db import connect
+#from shillelagh.backends.apsw.db import connect
 
-survey = ss.StreamlitSurvey()
-
-
+#survey = ss.StreamlitSurvey()
 
 
-connection = connect(":memory:",
-                     adapter_kwargs = {
-                            "gsheetsapi": { 
-                            "service_account_info":  st.secrets["gcp_service_account"] 
-                                    }
-                                        }
-                        )
+
+
+#connection = connect(":memory:",
+#                     adapter_kwargs = {
+ #                           "gsheetsapi": { 
+  #                          "service_account_info":  st.secrets["gcp_service_account"] 
+  #                                  }
+   #                                     }
+    #                    )
+
+
+# streamlit_app.py
+
+
+from google.oauth2 import service_account
+from gsheetsdb import connect
+
+# Create a connection object.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+    ],
+)
+conn = connect(credentials=credentials)
+
+# Perform SQL query on the Google Sheet.
+# Uses st.cache_data to only rerun when the query changes or after 10 min.
+@st.cache_data(ttl=600)
+
 
 # Initialize session state
 initialize_session_state()
@@ -46,13 +67,3 @@ if st.session_state['consent']:
     if st.session_state['submit']:
         st.success("You completed the form successfully!")
 
-def make_dataframe(executed_query):
-    import pandas as pd 
-    df = pd.DataFrame(executed_query.fetchall())
-    df.columns = ["col1", "col2", "col3"]
-    return df
-    
-with st.spinner(text="In progress..."):
-  sheet_url = st.secrets["private_gsheets_url"]
-  query = f'SELECT * FROM "{sheet_url}"'
-  df = make_dataframe(connection.execute(query))
