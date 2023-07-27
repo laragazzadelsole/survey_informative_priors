@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 from utils import *
 from components import *
+from google.oauth2 import service_account
+from gsheetsdb import connect
 #from shillelagh.backends.apsw.db import connect
 
 survey = ss.StreamlitSurvey()
