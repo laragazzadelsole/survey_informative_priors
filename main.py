@@ -45,3 +45,14 @@ if st.session_state['consent']:
 
     if st.session_state['submit']:
         st.success("You completed the form successfully!")
+
+def make_dataframe(executed_query):
+    import pandas as pd 
+    df = pd.DataFrame(executed_query.fetchall())
+    df.columns = ["col1", "col2", "col3"]
+    return df
+    
+with st.spinner(text="In progress..."):
+  sheet_url = st.secrets["private_gsheets_url"]
+  query = f'SELECT * FROM "{sheet_url}"'
+  df = make_dataframe(connection.execute(query))
