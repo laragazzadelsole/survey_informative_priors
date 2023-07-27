@@ -3,8 +3,20 @@ import streamlit as st
 import pandas as pd
 from utils import *
 from components import *
+from shillelagh.backends.apsw.db import connect
 
 survey = ss.StreamlitSurvey()
+
+
+
+
+connection = connect(":memory:",
+                     adapter_kwargs = {
+                            "gsheetsapi": { 
+                            "service_account_info":  st.secrets["gcp_service_account"] 
+                                    }
+                                        }
+                        )
 
 # Initialize session state
 initialize_session_state()
