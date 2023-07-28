@@ -2,21 +2,29 @@
 import streamlit as st
 from constants import *
 import pandas as pd
-from google.oauth2 import service_account
-from gsheetsdb import connect
+#from google.oauth2 import service_account
+#import gsheetsdb
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 # Create a connection object.
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"],
-    scopes=[
-        "https://www.googleapis.com/auth/spreadsheets",
-    ],
-)
-conn = connect(credentials=credentials)
+#credentials = service_account.Credentials.from_service_account_info(
+ #   st.secrets["gcp_service_account"],
+   # scopes=[
+  #      "https://www.googleapis.com/auth/spreadsheets",
+    #],
+#)
+#conn = connect(credentials=credentials)
+scope = ['https://www.googleapis.com/auth/spreadsheets',
+         'https://www.googleapis.com/auth/drive']
 
-# Perform SQL query on the Google Sheet.
-# Uses st.cache_data to only rerun when the query changes or after 10 min.
-#@st.cache_data(ttl=600)
+credentials = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+client = gspread.authorize(credentials)
+
+testsheet = client.create('Test')
+
+testsheet.share('sara.gironi97@gmail.com', perm_type = 'user', role = 'writer')
+
 
 def show_titles_and_subtitles():
     st.title(TITLE)
