@@ -18,7 +18,6 @@ survey = ss.StreamlitSurvey()
 
 
 # streamlit_app.py
-git config --global user.name "laragazzadelsole"
 
 
 
