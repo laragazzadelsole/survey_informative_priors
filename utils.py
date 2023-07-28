@@ -10,6 +10,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 # Create a connection object.
 #credentials = service_account.Credentials.from_service_account_info(
  #   st.secrets["gcp_service_account"],
+
    # scopes=[
   #      "https://www.googleapis.com/auth/spreadsheets",
     #],
@@ -18,7 +19,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 scope = ['https://www.googleapis.com/auth/spreadsheets',
          'https://www.googleapis.com/auth/drive']
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+credentials = ServiceAccountCredentials.from_json_keyfile_name('keys.json', scope)
 client = gspread.authorize(credentials)
 
 testsheet = client.create('Test')

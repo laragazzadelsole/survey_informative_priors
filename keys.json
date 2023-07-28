@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "survey-for-informative-priors",
+  "private_key_id": "fc1990f142d62653a2879374a0bba6e9a025ea1e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDhcGHpixWz2968\nFfos3lz1aImXW6n1lJymqnDz5sPJy3xsAizbN+vJC96WUYbsxbecYmRa4UArR7aM\nOA9/YS36qo6wbyqbvjxY2MfoAamOnVd5m+Y7eUkfrfm8tCAfKuIesAtfvip88sgC\nLtcBUpKMSgqMLPpnaok/jOdPKWVLnXjjvPQjyERMIzlaA1BZ7XJtntnU2OdEyIOu\nSNh2O8+G16rNJSU4Yi4Q2AwzTkKnvLmfxy1eGUYWi0oqJcU1dim25OqR/gaS6hPo\nucN3LfdiXQPVV6CYJuCSdQO6cHqJidaGbclutHq4xRxwEVSiezCvvKEPB6YF+3cv\npaR9QVFPAgMBAAECggEAIXHav3BdjTar70YTZ19VyyfxwagHqYydRjHjBUwm9Q5g\ngbrmN1+EdhRyC+WXGWlRDrz0xnFvDlIFSFLIzyJLqp8YVsnR4xPF6tMTqoe/RTkd\nJnLKepLzwOS+jWWWSQluTRSGRh31j7PfmEilUmeS9jJwfiXuFYmTSFT5u/TC4ln4\nS9xG0vrcLgE+aoXgbYkpkH9FZNp5nO29GUbrspQKzEvfPV2MvqEH6sdSP0Spz2HY\nBBBwSRLZTaXPuUG3mCfoSW9EnCqMke6sKR2rOhsgvfpP60ItiP2j7fp2cUn505gn\nqObp6XAn6v4iW2MESfkQRGc/shISPNktO9gds4SjAQKBgQD7C2x67NDGcr0BvCT8\nzhQaxo5xkxhrhl220ptOOOWIbt25rs5+S4jS1hljF6vdyEOEfsRaKv3qom6KkMiZ\n/gloO+P14XR4RuD1bFK8a2I/y+v2L27dT1LRhNsLQcbb0RqlR8dq14aLoBc8jiEF\nCOGmLLIkhgllKTAXs1vBm1veqQKBgQDl45GPs+c5XivkvDpwhmaQ+UM6OnP9lcfH\nwieUzWxA5+ow6Q94Q2lDU57cnKVihQMNp1F9kaw3Wbw0Cc8IjT1HjcM4EyPL5aYG\n+Ego0y0rV2EZlAUJxBxR3ymDC4oDDMeBiqiuw/3fNyIUAvAt1g2vpsrnt5GW1TEO\n41y7rXSDNwKBgQDVtjjoQJfOiLjMNE3MhObqkGOM3isoxh8bVxjtM1R7m93Xh6+0\nJjtZOPgtumYODMEllwEyvWyhhRvTjEOpjHCXsnxywjZzeetiIpAgZM4j/0ZlsqWP\nc0rOoGoUoC9YzB8B2yQxmT6puGRvoZMMhS4LV/tjSlPPMYwGcSLIo6hG2QKBgF3m\nSyGIWUzscz9VxwUJUMGsntIc6B3PXS/x1RsJoUsNr3HU8HWuC0Pt1vjDnyYTsICW\nNEn3A4IETERxMTiMAFjGxdOUtc1l+x/jsA3E3DFU2puJA1nO2cZzQdB+GRxPzvnR\nuj7QXVUcfvXvkU0XnrV9immFaJlUcVpkcg9StUGXAoGAcIEbBC1nBrHpn365imFA\nmJJ9B36N0jaN2AXILICY/9I32DkwlE90Po1fydObRCJri7rmLUnc4qzbmdq1BCAV\nnU7azxoa3aTHrywWLSyl8GuzHjZABn48/wwHn4qqV2jiK/OTbid0t3buXbdwn56l\nepzQ5nXsOwOT6zXpZbjvD9o=\n-----END PRIVATE KEY-----\n",
+  "client_email": "beliefs-platform@survey-for-informative-priors.iam.gserviceaccount.com",
+  "client_id": "106769105267526533582",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/beliefs-platform%40survey-for-informative-priors.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
