@@ -8,8 +8,6 @@ from components import *
 survey = ss.StreamlitSurvey()
 
 
-
-
 #connection = connect(":memory:",
 #                     adapter_kwargs = {
  #                           "gsheetsapi": { 
@@ -20,6 +18,7 @@ survey = ss.StreamlitSurvey()
 
 
 # streamlit_app.py
+git config --global user.name "laragazzadelsole"
 
 
 
