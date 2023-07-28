@@ -7,25 +7,37 @@ import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-# Create a connection object.
-#credentials = service_account.Credentials.from_service_account_info(
- #   st.secrets["gcp_service_account"],
-
-   # scopes=[
-  #      "https://www.googleapis.com/auth/spreadsheets",
-    #],
-#)
-#conn = connect(credentials=credentials)
 scope = ['https://www.googleapis.com/auth/spreadsheets',
          'https://www.googleapis.com/auth/drive']
 
-credentials = ServiceAccountCredentials.from_json_keyfile_name('keys.json', scope)
+def secrets_to_json():
+ return {
+    "type": st.secrets["type"],
+    "project_id": st.secrets["project_id"],
+    "private_key_id": st.secrets["private_key_id"],
+    "private_key": st.secrets["private_key"],
+    "client_email": st.secrets["client_email"],
+    "client_id": st.secrets["client_id"],
+    "auth_uri": st.secrets["auth_uri"],
+    "token_uri": st.secrets["token_uri"],
+    "auth_provider_x509_cert_url": st.secrets["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": st.secrets["client_x509_cert_url"],
+    "universe_domain": st.secrets["universe_domain"]
+}
+
+
+credentials = ServiceAccountCredentials.from_json_keyfile_dict(secrets_to_json())
+    
+    #
 client = gspread.authorize(credentials)
 
-testsheet = client.create('Test')
+# Uncomment if you want to create a new spreadsheet each time 
+#testsheet = client.create('Test')
+#testsheet.share('sara.gironi97@gmail.com', perm_type = 'user', role = 'writer')
 
-testsheet.share('sara.gironi97@gmail.com', perm_type = 'user', role = 'writer')
 
+
+# SURVEY
 
 def show_titles_and_subtitles():
     st.title(TITLE)
@@ -72,4 +84,20 @@ def add_submission():
             
     st.session_state['data'] = data
     df = pd.DataFrame(data)
-    df.to_csv('Results.csv', index=False)
+    #df.to_csv('Results.csv', index=False)
+
+
+    #Save the data in the spreadsheet in drive named 'Survey Answers'
+
+    sheet = client.open('Survey Answers').sheet1
+    #sheet.share('sara.gironi97@gmail.com', perm_type = 'user', role = 'writer')
+    sheet_updated = sheet.update([df.columns.values.tolist()])
+    sheet = sheet.append_rows( df.values.tolist())
+
+    # Failures to append data to the same file 
+
+    #sheet_updated = sheet.update([df.columns.values.tolist()])
+    #new_val = df.values.tolist()
+    #sheet_updated.append_row(new_val, value_input_option='RAW')
+
+    
